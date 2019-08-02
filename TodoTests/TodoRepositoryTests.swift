@@ -12,9 +12,9 @@ import XCTest
 class TodoRepositoryTests: XCTestCase {
     
     var todoRepository: TodoRepository!
-    let identifierForItem1: String = String(Date().timeIntervalSinceNow + 1)
-    let identifierForItem2: String = String(Date().timeIntervalSinceNow + 2)
-    let identifierForItem3: String = String(Date().timeIntervalSinceNow + 3)
+    let identifierForItem1: String = "\(Date.identifier)1"
+    let identifierForItem2: String = "\(Date.identifier)2"
+    let identifierForItem3: String = "\(Date.identifier)3"
 
     override func setUp() {
 
@@ -50,13 +50,13 @@ class TodoRepositoryTests: XCTestCase {
     }
     
     func testInsertItemToDatabase() {
-        let identifierForItem = String(Date().timeIntervalSinceNow)
+        let identifierForItem = Date.identifier
         let todoItem = MokeData.createObject(with: identifierForItem)
         XCTAssert(todoRepository.create(item: todoItem), "The create of item in the database")
     }
     
     func testDeleteItemFromDatabase() {
-        let identifierForItem = String(Date().timeIntervalSinceNow)
+        let identifierForItem = Date.identifier
         let todoItem  = MokeData.createObject(with: identifierForItem)
         XCTAssert(todoRepository.delete(item: todoItem), "The delete of item in the database")
     }

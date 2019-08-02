@@ -11,7 +11,7 @@ import RealmSwift
 
 class TodoItem: Object {
     // MARK: Properties
-    @objc dynamic var id = String(Date().timeIntervalSinceNow)
+    @objc dynamic var id = Date.identifier
     @objc dynamic var name: String = ""
     @objc dynamic var details: String = ""
     @objc dynamic var completed: Bool = false
