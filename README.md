@@ -17,7 +17,7 @@ TodoList Task
 
 * I use [SnapKit](https://github.com/SnapKit/SnapKit) to create constraints of UI.
 
-* I use [Realm Database](https://github.com/realm/realm-cocoa/tree/master/RealmSwift).
+* I use CoreData for database.
 
 
 
