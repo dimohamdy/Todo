@@ -7,7 +7,6 @@ target 'Todo' do
   inhibit_all_warnings!
 
   # Pods for Todo
-  pod 'RealmSwift'
   pod 'SnapKit', '~> 4.0.0'
   
   target 'TodoTests' do

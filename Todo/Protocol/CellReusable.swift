@@ -1,5 +1,5 @@
 //
-//  CellReusable.swift
+//  Reusable.swift
 //  Todo
 //
 //  Created by BinaryBoy on 7/28/19.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol CellReusable {
+protocol Reusable {
     static var identifier: String { get }
 }
 
-extension CellReusable {
+extension Reusable {
     static var identifier: String {
         return "\(self)"
     }

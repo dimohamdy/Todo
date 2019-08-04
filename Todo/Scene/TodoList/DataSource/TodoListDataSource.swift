@@ -14,7 +14,7 @@ class TodoListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     var viewModel: TodoListViewModel
     
     struct Constant {
-        static let heightOfTodoCell: CGFloat = 120
+        static let heightOfTodoCell: CGFloat = 70
     }
     
     init(viewModel: TodoListViewModel, itemsForTable: [ItemTableViewCellType]) {
@@ -38,6 +38,7 @@ class TodoListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         case .cellItem(let todoItem):
             if let cell: TodoTableViewCell = tableView.dequeueReusableCell(for: indexPath) {
                 cell.todoItem = todoItem
+                cell.todoRepository = viewModel.todoRepository
                 return cell
             }
             return UITableViewCell()
@@ -65,7 +66,6 @@ class TodoListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
             let item = itemsForTable[indexPath.row]
             switch item {
             case .cellItem(let todoItem):
-//                tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                 viewModel.delete(todoItem: todoItem, index: indexPath.row)
             default :
                 return

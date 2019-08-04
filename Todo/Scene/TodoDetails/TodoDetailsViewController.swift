@@ -79,14 +79,19 @@ private extension TodoDetailsViewController {
     }
     
     @objc func saveTodoItem(sender: UIButton) {
-        let todoItem = TodoItem()
         guard let name = todoTitleTextField.text, let details = todoDetailsTextView.text  else {
             //show alert message to fill data
             return
         }
-        todoItem.name = name
-        todoItem.details = details
-        if viewModel.save(todoItem: todoItem) {
+        
+        let todoItem = TodoItem(fromDictionary:
+            ["id": Date.identifier,
+             "name": name,
+             "details": details,
+             "completed": "false"
+            ])
+        
+        if viewModel.save(item: todoItem) {
             navigationController?.popViewController(animated: true)
         }
     }

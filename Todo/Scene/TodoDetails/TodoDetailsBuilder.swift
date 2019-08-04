@@ -10,7 +10,7 @@ import UIKit
 
 struct TodoDetailsBuilder {
     
-    static func viewController(todoItem: TodoItem = TodoItem()) -> UIViewController {
+    static func viewController(todoItem: TodoItem? = nil) -> UIViewController {
         
         let viewModel = TodoDetailsViewModel(todoItem: todoItem)
         

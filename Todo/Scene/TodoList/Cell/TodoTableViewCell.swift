@@ -9,13 +9,16 @@
 import UIKit
 import SnapKit
 
-class TodoTableViewCell: UITableViewCell, CellReusable {
+class TodoTableViewCell: UITableViewCell, Reusable {
 
     var todoTitleLabel: UILabel!
+    var todoDetailsLabel: UILabel!
     var isDoneSwitch: UISwitch!
     var cardView: UIView!
+    var labelsStackView: UIStackView!
     var stackView: UIStackView!
-
+    
+    weak var todoRepository: TodoRepository?
     struct CardView {
 
         static let cornerRadius: CGFloat = 5.0
@@ -33,7 +36,8 @@ class TodoTableViewCell: UITableViewCell, CellReusable {
             }
 
             todoTitleLabel.text = todoItem.name
-            isDoneSwitch.isOn = todoItem.completed
+            todoDetailsLabel.text = todoItem.details
+            isDoneSwitch.isOn = Bool(todoItem.completed) ?? false
         }
     }
 
@@ -54,7 +58,12 @@ class TodoTableViewCell: UITableViewCell, CellReusable {
 
     func setupStackView() {
 
-        stackView = UIStackView(arrangedSubviews: [todoTitleLabel, isDoneSwitch])
+        labelsStackView = UIStackView(arrangedSubviews: [todoTitleLabel, todoDetailsLabel])
+        labelsStackView.axis = .vertical
+        labelsStackView.alignment = .leading
+        labelsStackView.spacing = 0
+        
+        stackView = UIStackView(arrangedSubviews: [labelsStackView, isDoneSwitch])
         stackView.axis = .horizontal
         stackView.alignment = .leading
         stackView.spacing = 0
@@ -76,8 +85,12 @@ class TodoTableViewCell: UITableViewCell, CellReusable {
 
         todoTitleLabel = UILabel()
         todoTitleLabel.font = UIFont(name: todoTitleLabel.font.fontName, size: 15)
-
         todoTitleLabel.numberOfLines = 1
+        
+        
+        todoDetailsLabel = UILabel()
+        todoDetailsLabel.font = UIFont(name: todoDetailsLabel.font.fontName, size: 13)
+        todoDetailsLabel.numberOfLines = 0
         
         isDoneSwitch =  UISwitch(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
         isDoneSwitch.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
@@ -85,10 +98,10 @@ class TodoTableViewCell: UITableViewCell, CellReusable {
     }
     
     @objc func switchStateDidChange(_ sender: UISwitch) {
-        guard let todoItem = todoItem else {
+        guard let item = todoItem else {
             return
         }
-        RealmManager.update(todoItem: todoItem, completed: sender.isOn)
+        todoRepository?.update(item: item, completed: sender.isOn)
 
     }
     
