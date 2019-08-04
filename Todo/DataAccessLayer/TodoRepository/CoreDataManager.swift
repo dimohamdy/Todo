@@ -29,7 +29,7 @@ struct CoreDataManager {
     @discardableResult static func insert(item: TodoItem) -> Bool {
         
         let managedContext = AppDelegate.shared.persistentContainer.viewContext
-        let todoEntity = NSEntityDescription.entity(forEntityName: "TodoItem", in: managedContext)!
+        let todoEntity = NSEntityDescription.entity(forEntityName: Constant.Entity.todo, in: managedContext)!
         
         let todoItem = NSManagedObject(entity: todoEntity, insertInto: managedContext)
         todoItem.setValue(item.id, forKeyPath: "id")

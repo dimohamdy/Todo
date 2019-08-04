@@ -19,7 +19,7 @@ class TodoRepositoryTests: XCTestCase {
     override func setUp() {
 
         //Clear databsae
-        CoreDataManager.deleteAllData(entity: "TodoItem")
+        CoreDataManager.deleteAllData(entity: Constant.Entity.todo)
         // Arrange: setup ViewModel
         todoRepository = TodoRepository()
         

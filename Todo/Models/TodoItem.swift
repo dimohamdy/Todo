@@ -20,7 +20,7 @@ class TodoItem: NSManagedObject, Reusable {
      * Instantiate the instance using the passed dictionary values to set the properties values
      */
     convenience init(fromDictionary dictionary: [String: Any], context: NSManagedObjectContext = AppDelegate.shared.persistentContainer.viewContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "TodoItem", in: context)!
+        let entity = NSEntityDescription.entity(forEntityName: Constant.Entity.todo, in: context)!
         self.init(entity: entity, insertInto: context)
         if let completedValue = dictionary["completed"] as? String {
             completed = completedValue

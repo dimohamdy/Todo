@@ -13,7 +13,7 @@ final class TodoRepository: Repository {
     let managedContext = AppDelegate.shared.persistentContainer.viewContext
 
     func getAll() -> [TodoItem] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoItem")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constant.Entity.todo)
 
         do {
             return try managedContext.fetch(fetchRequest) as? [TodoItem] ?? []
@@ -25,7 +25,7 @@ final class TodoRepository: Repository {
     func get(identifier: String) -> TodoItem? {
         let managedContext = AppDelegate.shared.persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoItem")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constant.Entity.todo)
         
                 fetchRequest.fetchLimit = 1
                 fetchRequest.predicate = NSPredicate(format: "id = %@", identifier)
@@ -44,7 +44,7 @@ final class TodoRepository: Repository {
     
     @discardableResult func create(item: TodoItem) -> Bool {
         
-        let todoEntity = NSEntityDescription.entity(forEntityName: "TodoItem", in: managedContext)!
+        let todoEntity = NSEntityDescription.entity(forEntityName: Constant.Entity.todo, in: managedContext)!
         
         let todoItem = NSManagedObject(entity: todoEntity, insertInto: managedContext)
         todoItem.setValue(item.id, forKeyPath: "id")
@@ -62,7 +62,7 @@ final class TodoRepository: Repository {
     
     @discardableResult func update(item: TodoItem, completed: Bool = false) -> Bool {
       
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoItem")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constant.Entity.todo)
 
         fetchRequest.predicate = NSPredicate(format: "id = %@", item.id)
         do {
@@ -82,7 +82,7 @@ final class TodoRepository: Repository {
     }
     
     @discardableResult func delete(item: TodoItem) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoItem")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constant.Entity.todo)
 
         fetchRequest.predicate = NSPredicate(format: "id = %@", item.id)
         do {

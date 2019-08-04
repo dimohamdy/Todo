@@ -12,7 +12,7 @@ import Foundation
 class MokeData {
     
     static func clearDatabase() {
-        CoreDataManager.deleteAllData(entity: "TodoItem")
+        CoreDataManager.deleteAllData(entity: Constant.Entity.todo)
     }
     
     static func setFakeData() {
